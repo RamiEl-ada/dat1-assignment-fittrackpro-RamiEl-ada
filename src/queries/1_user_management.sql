@@ -49,7 +49,7 @@ WHERE ca.attendance_status = 'Registered'
 GROUP BY 
     m.member_id
 ORDER BY 
-    registration_count
+    registration_count ASC
 LIMIT 1;
 
 -- 1.6
