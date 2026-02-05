@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS member_health_metrics;
 DROP TABLE IF EXISTS equipment_maintenance_log;
 
 CREATE TABLE locations(
-    location_id INT PRIMARY KEY NOT NULL,
+    location_id INTEGER PRIMARY KEY,
     name VARCHAR(30),
     address VARCHAR(60),
     phone_number CHAR(12) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE locations(
 );
 
 CREATE TABLE members (
-    member_id INT PRIMARY KEY,
+    member_id INTEGER PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(50),
     email VARCHAR(325),
@@ -38,7 +38,7 @@ CREATE TABLE members (
 );
 
 CREATE TABLE staff (
-    staff_id INT PRIMARY KEY NOT NULL,
+    staff_id INTEGER PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(50),
     email VARCHAR(325) NOT NULL
@@ -46,35 +46,35 @@ CREATE TABLE staff (
     phone_number CHAR(12) NOT NULL,
     position VARCHAR(100) NOT NULL,
     hire_date DATE NOT NULL,
-    location_id INT NOT NULL,
+    location_id INTEGER NOT NULL,
     FOREIGN KEY(location_id) REFERENCES locations(location_id)
 );
 
 CREATE TABLE equipment (
-    equipment_id INT PRIMARY KEY NOT NULL,
+    equipment_id INTEGER PRIMARY KEY,
     name VARCHAR(300) NOT NULL,
     type VARCHAR(50) NOT NULL,
     purchase_date DATE NOT NULL,
     last_maintenance_date DATE NOT NULL,
     next_maintenance_date DATE NOT NULL,
-    location_id INT NOT NULL,
+    location_id INTEGER NOT NULL,
     FOREIGN KEY(location_id) REFERENCES locations(location_id)
 );
 
 CREATE TABLE classes (
-    class_id INT PRIMARY KEY,
+    class_id INTEGER PRIMARY KEY,
     name VARCHAR(300),
     description VARCHAR(300),
-    capacity INT,
-    duration INT,
-    location_id INT,
+    capacity INTEGER,
+    duration INTEGER,
+    location_id INTEGER,
     FOREIGN KEY(location_id) REFERENCES locations(location_id)
 );
 
 CREATE TABLE class_schedule (
-    schedule_id INT PRIMARY KEY NOT NULL,
-    class_id INT NOT NULL,
-    staff_id INT NOT NULL,
+    schedule_id INTEGER PRIMARY KEY,
+    class_id INTEGER NOT NULL,
+    staff_id INTEGER NOT NULL,
     start_time DATETIME,
     end_time DATETIME,
     FOREIGN KEY(class_id) REFERENCES classes(class_id),
@@ -82,8 +82,8 @@ CREATE TABLE class_schedule (
 );
 
 CREATE TABLE memberships (
-    membership_id INT PRIMARY KEY,
-    member_id INT,
+    membership_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
     type VARCHAR(20),
     start_date DATE,
     end_date DATE,
@@ -92,9 +92,9 @@ CREATE TABLE memberships (
 );
 
 CREATE TABLE attendance (
-    attendance_id INT PRIMARY KEY,
-    member_id INT,
-    location_id INT,
+    attendance_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
+    location_id INTEGER,
     check_in_time DATETIME,
     check_out_time DATETIME,
     FOREIGN KEY(member_id) REFERENCES members(member_id),
@@ -102,17 +102,17 @@ CREATE TABLE attendance (
 );
 
 CREATE TABLE class_attendance (
-    class_attendance_id INT PRIMARY KEY,
-    schedule_id INT,
-    member_id INT,
+    class_attendance_id INTEGER PRIMARY KEY,
+    schedule_id INTEGER,
+    member_id INTEGER,
     attendance_status VARCHAR(25),
     FOREIGN KEY(schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY(member_id) REFERENCES members(member_id)
 );
 
 CREATE TABLE payments (
-    payment_id INT PRIMARY KEY,
-    member_id INT,
+    payment_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
     amount FLOAT,
     payment_date DATETIME,
     payment_method VARCHAR(25),
@@ -121,9 +121,9 @@ CREATE TABLE payments (
 );
 
 CREATE TABLE personal_training_sessions (
-    session_id INT PRIMARY KEY,
-    member_id INT,
-    staff_id INT,
+    session_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
+    staff_id INTEGER,
     session_date DATE,
     start_time TIME,
     end_time TIME,
@@ -132,8 +132,8 @@ CREATE TABLE personal_training_sessions (
 );
 
 CREATE TABLE member_health_metrics (
-    metric_id INT PRIMARY KEY,
-    member_id INT,
+    metric_id INTEGER PRIMARY KEY,
+    member_id INTEGER,
     measurement_date DATE,
     weight FLOAT,
     body_fat_percentage FLOAT,
@@ -143,11 +143,11 @@ CREATE TABLE member_health_metrics (
 );
 
 CREATE TABLE equipment_maintenance_log (
-    log_id INT PRIMARY KEY,
-    equipment_id INT,
+    log_id INTEGER PRIMARY KEY,
+    equipment_id INTEGER,
     maintenance_date DATE,
     description VARCHAR(400),
-    staff_id INT,
+    staff_id INTEGER,
     FOREIGN KEY(staff_id) REFERENCES staff(staff_id),
     FOREIGN KEY(equipment_id) REFERENCES staff(staff_id)
 );

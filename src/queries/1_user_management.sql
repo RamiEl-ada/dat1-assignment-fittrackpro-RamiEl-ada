@@ -29,7 +29,6 @@ SELECT
 FROM members as m
 INNER JOIN class_attendance as ca
     ON m.member_id = ca.member_id
-    WHERE ca.attendance_status = 'Registered'
 GROUP BY 
     m.member_id
 ORDER BY 
@@ -45,7 +44,6 @@ SELECT
 FROM members as m
 INNER JOIN class_attendance as ca
     ON m.member_id = ca.member_id
-WHERE ca.attendance_status = 'Registered'
 GROUP BY 
     m.member_id
 ORDER BY 
