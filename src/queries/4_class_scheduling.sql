@@ -33,7 +33,7 @@ INSERT INTO class_attendance(schedule_id, member_id, attendance_status)
 VALUES(1, 11, 'Registered');
 
 -- 4.4 
-DELETE FROM class_schedule
+DELETE FROM class_attendance
 WHERE schedule_id = 7
 AND member_id = 3;
 
@@ -51,11 +51,11 @@ GROUP BY name
 ORDER BY registration_count DESC;
 
 -- 4.6 
-SELECT AVG(class_total) as member_per_class
+SELECT ROUND(AVG(class_total),2) as member_per_class
 FROM
 (   SELECT
         member_id,
-        COUNT(member_id) as class_total
+        COUNT(*) as class_total
     FROM class_attendance
     GROUP BY member_id
 );
