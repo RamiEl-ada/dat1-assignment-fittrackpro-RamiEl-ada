@@ -31,6 +31,6 @@ SELECT
     ms.end_date
 FROM members as m
 INNER JOIN memberships as ms
-ON m.member_id and ms.member_id
-WHERE ms.end_date BETWEEN '2025-01-01' AND '2025-12-31'
-GROUP BY m.member_id
+ON m.member_id = ms.member_id
+WHERE STRFTIME('%Y',ms.end_date) = '2025' 
+GROUP BY m.member_id;
