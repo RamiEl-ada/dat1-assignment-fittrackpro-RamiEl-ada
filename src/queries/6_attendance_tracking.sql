@@ -13,7 +13,7 @@ FROM attendance;
 
 -- 6.3 
 SELECT
-CASE strftime('%w', check_in_time)
+CASE STRFTIME('%w', check_in_time)
     WHEN '0' THEN 'Sunday'
     WHEN '1' THEN 'Monday'
     WHEN '2' THEN 'Tuesday'
@@ -25,8 +25,16 @@ CASE strftime('%w', check_in_time)
     COUNT(member_id) AS visit_count
 FROM attendance
 GROUP BY day_of_week
-ORDER BY visit_count DESC
 LIMIT 1;
 
 -- 6.4 
-
+SELECT
+    l.name as location_name,
+    ROUND(CASE WHEN MIN(check_in_time) IS NULL THEN 0
+    ELSE COUNT(member_id) * 1.0 /
+    (JULIANDAY(MAX(check_in_time)) - JULIANDAY(MIN(check_in_time)) + 1)
+    END, 2) AS avg_daily_attendance
+FROM locations as l
+LEFT JOIN attendance as a
+ON a.location_id = l.location_id
+GROUP BY l.location_id;
