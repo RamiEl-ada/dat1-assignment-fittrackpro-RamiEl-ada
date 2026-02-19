@@ -17,6 +17,6 @@ SELECT
 FROM staff as s
 INNER JOIN personal_training_sessions as pts
 ON s.staff_id = pts.staff_id
-WHERE session_date BETWEEN '2025-01-20' AND '2025-02-19'
+WHERE session_date BETWEEN '2025-01-20' AND '2025-02-19';
 
 

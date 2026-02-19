@@ -10,4 +10,4 @@ SELECT
 FROM personal_training_sessions as pts
 INNER JOIN members as m
 ON pts.member_id = m.member_id
-WHERE pts.staff_id = 2
+WHERE pts.staff_id = 2;
