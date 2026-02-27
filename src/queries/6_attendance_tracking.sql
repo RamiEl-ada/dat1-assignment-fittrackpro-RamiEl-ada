@@ -32,7 +32,7 @@ SELECT
     l.name as location_name,
     ROUND(CASE WHEN MIN(check_in_time) IS NULL THEN 0
     ELSE COUNT(member_id) * 1.0 /
-    (JULIANDAY(MAX(check_in_time)) - JULIANDAY(MIN(check_in_time)) + 1)
+    (JULIANDAY(MAX(check_in_time)) / JULIANDAY(MIN(check_in_time)) + 1)
     END, 2) AS avg_daily_attendance
 FROM locations as l
 LEFT JOIN attendance as a
